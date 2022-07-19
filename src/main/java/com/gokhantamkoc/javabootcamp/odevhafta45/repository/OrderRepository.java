@@ -3,7 +3,6 @@ package com.gokhantamkoc.javabootcamp.odevhafta45.repository;
 import com.gokhantamkoc.javabootcamp.odevhafta45.model.Order;
 import com.gokhantamkoc.javabootcamp.odevhafta45.model.OrderDetail;
 import com.gokhantamkoc.javabootcamp.odevhafta45.model.Owner;
-import com.gokhantamkoc.javabootcamp.odevhafta45.model.Product;
 import com.gokhantamkoc.javabootcamp.odevhafta45.util.DatabaseConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -123,7 +122,7 @@ public class OrderRepository {
                         order,
                         product,
                         amount,
-                        amountType
+                        amountType  
                     )
                 );
             }
