@@ -2,10 +2,13 @@ package com.gokhantamkoc.javabootcamp.odevhafta45.repository;
 
 import com.gokhantamkoc.javabootcamp.odevhafta45.model.Product;
 import com.gokhantamkoc.javabootcamp.odevhafta45.util.DatabaseConnection;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component

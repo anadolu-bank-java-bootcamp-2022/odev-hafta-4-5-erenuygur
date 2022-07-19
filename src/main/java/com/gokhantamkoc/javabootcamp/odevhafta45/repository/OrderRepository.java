@@ -3,6 +3,7 @@ package com.gokhantamkoc.javabootcamp.odevhafta45.repository;
 import com.gokhantamkoc.javabootcamp.odevhafta45.model.Order;
 import com.gokhantamkoc.javabootcamp.odevhafta45.model.OrderDetail;
 import com.gokhantamkoc.javabootcamp.odevhafta45.model.Owner;
+import com.gokhantamkoc.javabootcamp.odevhafta45.model.Product;
 import com.gokhantamkoc.javabootcamp.odevhafta45.util.DatabaseConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -107,8 +108,8 @@ public class OrderRepository {
                 String status = rs.getString("status");
                 String type = rs.getString("type");
                 Long productId = rs.getLong("product_id");
-                float amount = (float)resSet.getLong("amount");
-                String amountType = resSet.getString("amount_type");
+                float amount = (float)rs.getLong("amount");
+                String amountType = rs.getString("amount_type");
 
 
                 Order order = this.get(orderId);
@@ -118,11 +119,11 @@ public class OrderRepository {
                     new OrderDetail(
                         id,
                         status,
-                        type
-                        order_id,
-                        product_id,
-                        amonunt,
-                        amount_type  
+                        type,
+                        order,
+                        product,
+                        amount,
+                        amountType
                     )
                 );
             }
