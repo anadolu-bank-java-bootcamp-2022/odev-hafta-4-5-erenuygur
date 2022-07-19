@@ -35,7 +35,7 @@ public class ProductService {
 
     public List<Product> listProduct() {
         // BU METHODU 1. GOREV ICIN DOLDURUNUZ
-        return newproductRepositoryProduct.getAll();
+        return productRepository.getAll();
     }
 
     // BU METHODU SILMEYINIZ YOKSA TESTLER CALISMAZ
