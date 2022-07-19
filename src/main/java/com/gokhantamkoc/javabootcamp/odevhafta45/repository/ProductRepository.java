@@ -29,7 +29,7 @@ public class ProductRepository {
                 String name = rs.getString("name");
                 String description = rs.getString("description");
                 products.add(
-                    new Owner(
+                    new Product(
                         id,
                         name,
                         description
@@ -50,7 +50,7 @@ public class ProductRepository {
             preparedStatement.setLong(1, id);
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
-                return new Owner(
+                return new Product(
                     rs.getLong("id"),
                     rs.getString("name"),
                     rs.getString("description")
