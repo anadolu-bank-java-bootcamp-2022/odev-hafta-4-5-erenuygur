@@ -96,6 +96,42 @@ public class OrderRepository {
 
     public List<OrderDetail> getOrderDetails(long orderId) {
         // BU METHODU 2. GOREV ICIN DOLDURUNUZ
+        List<OrderDetail> orderDetails = new ArrayList<>();
+        final String SQL = 
+                "SELECT id, status, type, order_id, product_id, amonunt, amount_type FROM public.order_detail WHERE order_id = ?";
+        try (PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(SQL)) {
+            preparedStatement.setLong(1, orderId);
+            ResultSet rs = preparedStatement.executeQuery();
+        while (rs.next()) {
+                long id = rs.getLong("id");
+                String status = rs.getString("status");
+                String type = rs.getString("type");
+                Long productId = rs.getLong("product_id");
+                float amount = (float)resSet.getLong("amount");
+                String amountType = resSet.getString("amount_type");
+
+
+                Order order = this.get(orderId);
+                Product product = this.productRepository.get(productId);
+
+                orderDetails.add(
+                    new OrderDetail(
+                        id,
+                        status,
+                        type
+                        order_id,
+                        product_id,
+                        amonunt,
+                        amount_type  
+                    )
+                );
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+
+        return orderDetails;
     }
 
     public void save(Order order) throws RuntimeException {

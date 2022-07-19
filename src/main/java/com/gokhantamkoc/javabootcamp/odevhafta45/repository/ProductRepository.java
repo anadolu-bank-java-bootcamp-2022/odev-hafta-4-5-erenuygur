@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.util.List;
 
 @Component
+@AllArgsConstructor
 public class ProductRepository {
 
     DatabaseConnection databaseConnection;
