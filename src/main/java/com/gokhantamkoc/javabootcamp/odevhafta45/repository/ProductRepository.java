@@ -70,7 +70,7 @@ public class ProductRepository {
 
     public void save(Product product) throws RuntimeException {
         // BU METHODU 1. GOREV ICIN DOLDURUNUZ
-        final String SQL = "INSERT INTO public.product(id, name, description) values(?, ?, ?)";
+        final String SQL = "INSERT INTO public.product (id, name, description) values(?, ?, ?)";
         try (PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(SQL)) {
             preparedStatement.setLong(1, product.getId());
             preparedStatement.setString(2, product.getName());

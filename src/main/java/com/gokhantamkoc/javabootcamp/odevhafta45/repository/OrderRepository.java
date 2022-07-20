@@ -3,6 +3,8 @@ package com.gokhantamkoc.javabootcamp.odevhafta45.repository;
 import com.gokhantamkoc.javabootcamp.odevhafta45.model.Order;
 import com.gokhantamkoc.javabootcamp.odevhafta45.model.OrderDetail;
 import com.gokhantamkoc.javabootcamp.odevhafta45.model.Owner;
+import com.gokhantamkoc.javabootcamp.odevhafta45.model.Product;
+import com.gokhantamkoc.javabootcamp.odevhafta45.service.ProductService;
 import com.gokhantamkoc.javabootcamp.odevhafta45.util.DatabaseConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -54,14 +56,14 @@ public class OrderRepository {
                 String requesterAddress = rs.getString("requester_address");
                 String bidderAddress = rs.getString("bidder_address");
                 orders.add(
-                    new Order(
-                        id,
-                        status,
-                        requester,
-                        bidder,
-                        requesterAddress,
-                        bidderAddress
-                    )
+                        new Order(
+                                id,
+                                status,
+                                requester,
+                                bidder,
+                                requesterAddress,
+                                bidderAddress
+                        )
                 );
             }
         } catch (Exception ex) {
@@ -78,12 +80,12 @@ public class OrderRepository {
             ResultSet rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 return new Order(
-                    rs.getLong("id"),
-                    rs.getString("status"),
-                    this.ownerRepository.get(rs.getLong("requester_id")),
-                    this.ownerRepository.get(rs.getLong("bidder_id")),
-                    rs.getString("requester_address"),
-                    rs.getString("bidder_address")
+                        rs.getLong("id"),
+                        rs.getString("status"),
+                        this.ownerRepository.get(rs.getLong("requester_id")),
+                        this.ownerRepository.get(rs.getLong("bidder_id")),
+                        rs.getString("requester_address"),
+                        rs.getString("bidder_address")
                 );
             } else {
                 return null;
@@ -97,17 +99,17 @@ public class OrderRepository {
     public List<OrderDetail> getOrderDetails(long orderId) {
         // BU METHODU 2. GOREV ICIN DOLDURUNUZ
         List<OrderDetail> orderDetails = new ArrayList<>();
-        final String SQL = 
-                "SELECT id, status, type, order_id, product_id, amonunt, amount_type FROM public.order_detail WHERE order_id = ?";
+        final String SQL =
+                "SELECT id, status, type, order_id, product_id, amount, amount_type FROM public.order_detail WHERE order_id = ?";
         try (PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(SQL)) {
             preparedStatement.setLong(1, orderId);
             ResultSet rs = preparedStatement.executeQuery();
-        while (rs.next()) {
+            while (rs.next()) {
                 long id = rs.getLong("id");
                 String status = rs.getString("status");
                 String type = rs.getString("type");
-                Long productId = rs.getLong("product_id");
-                float amount = (float)rs.getLong("amount");
+                long productId = rs.getLong("product_id");
+                float amount = rs.getFloat("amount");
                 String amountType = rs.getString("amount_type");
 
 
@@ -115,15 +117,15 @@ public class OrderRepository {
                 Product product = this.productRepository.get(productId);
 
                 orderDetails.add(
-                    new OrderDetail(
-                        id,
-                        status,
-                        type,
-                        order,
-                        product,
-                        amount,
-                        amountType  
-                    )
+                        new OrderDetail(
+                                id,
+                                status,
+                                type,
+                                order,
+                                product,
+                                amount,
+                                amountType
+                        )
                 );
             }
         } catch (Exception ex) {

@@ -14,6 +14,7 @@ public class OrderDetail {
     private float amount;
     private String amountType;          // piece(s), kg, set(s)
 
+
     public String toString() {
         return String.format(
                 "%d %s %s %s %s",
